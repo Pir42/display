@@ -1,30 +1,37 @@
 
-<div class="sidebar">
-  <div class="sidebar__logo">
-    <%= image_pack_tag('logos/logo_text.svg') %>
-  </div>
-  <div class="sidebar__item">
-    <div class="link">
-      <span class="icon"></span>
-      <a href="#">Chants</a>
+<div class="sidebar sidebar-phone">
+  <div class="sidebar__header">
+    <div class="sidebar__logo">
+      <%= image_pack_tag('logos/logo_text.svg') %>
     </div>
-    <div class="action">
-      <span class="action__add"></span>
+    <div class="sidebar__menu">
+      <span class="icon-text-align-justify"></span>
     </div>
   </div>
-  <div class="sidebar__item">
-    <div class="link">
-      <span class="icon"></span>
-      <a href="#">Setlists</a>
+  <div class="sidebar__nav">
+    <div class="sidebar__item">
+      <div class="link">
+        <span class="icon-music-note"></span>
+        <%= link_to "Chants", root_url, class: "subtitle-1" %>
+      </div>
+      <div class="action">
+        <span class="action__add icon-plus"></span>
+      </div>
     </div>
-    <div class="action">
-      <span class="action__add"></span>
+    <div class="sidebar__item">
+      <div class="link">
+        <span class="icon-player-list"></span>
+        <%= link_to "Setlists", root_url, class: "subtitle-1" %>
+      </div>
+      <div class="action">
+        <span class="action__add icon-plus"></span>
+      </div>
     </div>
-  </div>
-  <div class="sidebar__item">
-    <div class="link">
-      <span class="icon"></span>
-      <a href="#">Commencer une diffusion</a>
+    <div class="sidebar__item">
+      <div class="link">
+        <span class="icon"></span>
+        <%= link_to "Commencer une diffusion", root_url, class: "subtitle-1" %>
+      </div>
     </div>
   </div>
 </div>

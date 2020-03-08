@@ -8,5 +8,16 @@
   --grey: #bdbdbd;
 }
 
+body {
+  margin: 0;
+}
+
 @import "./components/text.scss";
+
+@import "./components/layout.scss";
+@import "./components/sidebar.scss";
+
+@import "./components/actions.scss";
+
+
 

@@ -11,4 +11,35 @@ require("channels")
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
 
-import "../styles/styles.scss"
+import "../../../lib/assets/fonticon/style.css";
+import "../styles/styles.scss";
+
+document.addEventListener('turbolinks:load', () => {
+  let widthPhone = 780;
+
+  // Add custom class to display phone if 
+  // innerWidth of screen is less than
+  // widthPone
+  const mediaPhone = () => {
+    let sidebar = document.querySelector(".sidebar")
+    if(window.innerWidth < widthPhone && !sidebar.className.includes("sidebar-phone")) {
+      sidebar.className += " sidebar-phone"
+    }
+    if (window.innerWidth > widthPhone) {
+      sidebar.className = sidebar.className.replace(' sidebar-phone', '')
+    }
+  }
+
+  mediaPhone();
+  window.addEventListener('resize', () => mediaPhone());
+
+  document.querySelector(".sidebar__menu").addEventListener("click", () => {
+    let sidebarNav = document.querySelector(".sidebar__nav");
+    if(sidebarNav.className.includes("display")) {
+      sidebarNav.className = sidebarNav.className.replace(' display', '')
+    } else {
+      sidebarNav.className += " display"
+    }
+  })
+
+})
