@@ -1,0 +1,2 @@
+module PagesStaticHelper
+end
