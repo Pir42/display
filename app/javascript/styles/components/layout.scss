@@ -1,10 +1,20 @@
 .main {
+  max-width: calc(100% - 322px);
   margin-left: 322px;
+}
+
+.container {
+  max-width: calc(100% - 120px);
+  margin: 30px 60px;
 }
 
 @media screen and (max-width: 780px) {
   .main {
+    max-width: 100%;
     margin-left: 0;
     margin-top: 52px;
+  }
+  .container {
+    max-width: 100%;
   }
 }

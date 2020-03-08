@@ -12,10 +12,12 @@
     <div class="sidebar__item">
       <div class="link">
         <span class="icon-music-note"></span>
-        <%= link_to "Chants", root_url, class: "subtitle-1" %>
+        <%= link_to "Chants", songs_url, class: "subtitle-1" %>
       </div>
       <div class="action">
-        <span class="action__add icon-plus"></span>
+        <%= link_to new_song_url do %>
+          <span class="action__add icon-plus"></span>
+        <% end %>
       </div>
     </div>
     <div class="sidebar__item">

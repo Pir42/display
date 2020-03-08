@@ -1,0 +1,28 @@
+<%= form_for @song do |f| %>
+  <div class="field">
+    <%= f.label :title, "Titre*" %>
+    <%= f.text_field :title, placeholder: "Titre", required: true, class: "subtitle-1" %>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-lg-2">
+      <div class="field">
+      <%= f.label :artist, "Artiste" %>
+      <%= f.text_field :artist, placeholder: "Artiste" %>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-lg-2">
+      <div class="field">
+        <%= f.label :duration, "Durée" %>
+        <%= f.text_field :title, placeholder: "Durée" %>
+      </div>    
+    </div>
+    <div class="col-xs-1">
+      <div class="field">
+        <%= f.label :bpm, "BPM" %>
+        <%= f.text_field :bpm, placeholder: "BPM" %>
+      </div>    
+    </div>
+  </div>
+
+  <%= f.submit "Enregistrer" %>
+<% end %>
