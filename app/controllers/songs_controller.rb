@@ -21,6 +21,19 @@ class SongsController < ApplicationController
     end
   end
 
+  # GET /songs/:id
+  def show
+    @song = Song.find(params[:id])
+    @song.chords = [
+      {
+        section: "Intro",
+        chords: [
+          ["Am", "B", "E", "C"]
+        ]
+      }
+    ]
+  end
+
   private
 
   def song_params

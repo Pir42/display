@@ -1,0 +1,7 @@
+<h1><%= @song.title %></h1>
+
+<div data-behavior="vue" data-chords="<%= @song.chords.to_json %>">
+  <app v-bind:chords="chords"/>
+</div>
+
+<%= javascript_pack_tag 'song' %>
