@@ -17,6 +17,11 @@ document.addEventListener('turbolinks:load', () => {
       return {
         chords: chords
       }
+    },
+    methods: {
+      filter_sections() {
+        this.chords = this.chords.filter((s) => s.title != "")
+      }
     }
   })
 })

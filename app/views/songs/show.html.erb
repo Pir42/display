@@ -1,7 +1,17 @@
-<h1><%= @song.title %></h1>
+<%= form_for @song do |f| %>
+  <%= render "songs/shared/form", f: f %>
 
-<div data-behavior="vue" data-chords="<%= @song.chords.to_json %>">
-  <app v-bind:chords="chords"/>
-</div>
+  <h5>Structure</h5>
+
+  <div data-behavior="vue" data-chords="<%= @song.chords %>">
+    <app v-bind:chords="chords" v-on:section_change="filter_sections"></app>
+    <input type="hidden" name="song[chords]" v-bind:value="JSON.stringify(chords)">
+  </div>
+
+
+  <%= f.submit "Enregistrer" %>
+<% end %>
+
+
 
 <%= javascript_pack_tag 'song' %>

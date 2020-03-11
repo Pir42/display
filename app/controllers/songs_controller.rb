@@ -24,14 +24,21 @@ class SongsController < ApplicationController
   # GET /songs/:id
   def show
     @song = Song.find(params[:id])
-    @song.chords = [
-      {
-        section: "Intro",
-        chords: [
-          ["Am", "B", "E", "C"]
-        ]
-      }
-    ]
+    if !@song.chords
+      @song.chords = "[]"
+    end
+  end
+
+  # PUT /songs/:id
+  def update
+    @song = Song.find(params[:id])
+    respond_to do |format|
+      if @song.update(song_params)
+        format.html { redirect_to songs_path }
+      else
+        format.html { render :show }
+      end
+    end
   end
 
   private
