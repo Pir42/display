@@ -26,9 +26,7 @@ export default {
       if(this.new_section != "") {
         this.chords.push({
           title: this.new_section,
-          chords: [
-            []
-          ]
+          chords: []
         })
         this.new_section = "";
       }

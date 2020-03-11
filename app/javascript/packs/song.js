@@ -20,7 +20,23 @@ document.addEventListener('turbolinks:load', () => {
     },
     methods: {
       filter_sections() {
-        this.chords = this.chords.filter((s) => s.title != "")
+        this.chords.forEach((section, index) => {
+          if(section.title == ""){
+            this.chords.splice(index, 1)
+          } else {
+            section.chords.forEach((bar, i) => {
+              bar.forEach((chord, a) => {
+                if(chord == "") {
+                  this.chords[index].chords[i].splice(a, 1)
+                }
+              })
+              if (bar.length == 0){
+                this.chords[index].chords.splice(i, 1)
+              }
+            })
+          }
+
+        })
       }
     }
   })

@@ -1,8 +1,8 @@
 <template>
   <div id="bar">
     <div class="chord__container">
-      <div v-for="(chord, i) in the_bar" :key=i class="chord__item">
-        <input type="text" v-model="the_bar[i]" @change="bar_change">
+      <div v-for="(chord, i) in bar" :key=i class="chord__item">
+        <input type="text" v-model="bar[i]" @change="bar_change">
       </div>
       <div class="chord__item">
         <input type="text" v-model="new_chord" placeholder="E" class="chord__guess" @change="chord_change">
@@ -18,17 +18,16 @@ export default {
   },
   data() {
     return {
-      the_bar: this.bar,
       new_chord: ""
     }
   },
   methods: {
     bar_change() {
-      this.the_bar = this.the_bar.filter((c) => c != "")
+      this.$emit("bar_change")
     },
     chord_change() {
       if(this.new_chord != "") {
-        this.the_bar.push(this.new_chord)
+        this.bar.push(this.new_chord)
         this.new_chord = ""
       }
     }
@@ -38,7 +37,7 @@ export default {
 
 <style lang="scss">
   .chord__container {
-    margin: 10px 0;
+    margin: 12px 0;
     display: block;
     .chord__item {
       display: inline-block;
