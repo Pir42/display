@@ -1,7 +1,7 @@
 <template>
   <div id="section">
-    <input type="text" class="section__title" v-model="section.title" v-on:change="change_title">
-    <bar v-for="(bar, index) in section.chords" :key=index :bar="bar" v-on:bar_change="bar_changed"/>
+    <input type="text" class="section__title" v-model="section.title">
+    <bar v-for="(bar, index) in section.chords" :key=index :bar="bar"/>
     <div class="chord__container">
       <div class="chord__item">
         <input type="text" v-model="new_bar" v-on:change="bar_change" class="chord__guess" placeholder="A" v-if="!section.chords.length || section.chords.length >= 1">
@@ -32,12 +32,6 @@ export default {
         this.section.chords.push([this.new_bar])
         this.new_bar = "";
       }
-    },
-    bar_changed() {
-      this.$emit("section_change")
-    },
-    change_title() {
-      this.$emit('section_change')
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <section-chord v-for="(section, c) in chords" :key=c :section="section" class="section" v-on:section_change="filter_sections"/>
+    <section-chord v-for="(section, c) in chords" :key=c :section="section" class="section"/>
     <input type="text" v-model="new_section" v-on:change="section_change" class="section__guess" placeholder="Refrain">
   </div>
 </template>
@@ -30,9 +30,6 @@ export default {
         })
         this.new_section = "";
       }
-    },
-    filter_sections() {
-      this.$emit('section_change')
     }
   }
 }

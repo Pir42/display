@@ -4,7 +4,7 @@
   <h5>Structure</h5>
 
   <div data-behavior="vue" data-chords="<%= @song.chords %>">
-    <app v-bind:chords="chords" v-on:section_change="filter_sections"></app>
+    <app v-bind:chords="filtered_chords"></app>
     <input type="hidden" name="song[chords]" v-bind:value="JSON.stringify(chords)">
   </div>
 

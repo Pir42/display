@@ -18,9 +18,10 @@ document.addEventListener('turbolinks:load', () => {
         chords: chords
       }
     },
-    methods: {
-      filter_sections() {
-        this.chords.forEach((section, index) => {
+    computed: {
+      filtered_chords() {
+        let filtered_chords = this.chords;
+        filtered_chords.forEach((section, index) => {
           if(section.title == ""){
             this.chords.splice(index, 1)
           } else {
@@ -35,8 +36,8 @@ document.addEventListener('turbolinks:load', () => {
               }
             })
           }
-
         })
+        return filtered_chords
       }
     }
   })

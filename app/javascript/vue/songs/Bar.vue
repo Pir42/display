@@ -2,7 +2,7 @@
   <div id="bar">
     <div class="chord__container">
       <div v-for="(chord, i) in bar" :key=i class="chord__item">
-        <input type="text" v-model="bar[i]" @change="bar_change">
+        <input type="text" v-model="bar[i]">
       </div>
       <div class="chord__item">
         <input type="text" v-model="new_chord" placeholder="E" class="chord__guess" @change="chord_change">
@@ -22,9 +22,6 @@ export default {
     }
   },
   methods: {
-    bar_change() {
-      this.$emit("bar_change")
-    },
     chord_change() {
       if(this.new_chord != "") {
         this.bar.push(this.new_chord)
