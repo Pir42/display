@@ -14,7 +14,7 @@ class SongsController < ApplicationController
     @song = Song.new(song_params)
     respond_to do |format|
       if @song.save
-        format.html { redirect_to songs_path }
+        format.html { redirect_to song_path(@song) }
       else
         format.html { render :edit }
       end
@@ -47,7 +47,6 @@ class SongsController < ApplicationController
     params.require(:song).permit(
       :title,
       :artist,
-      :duration,
       :bpm,
       :chords
     )

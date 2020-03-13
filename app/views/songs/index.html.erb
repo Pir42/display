@@ -1,1 +1,27 @@
 <h1 class="title-3">Chants</h1>
+
+<div data-behavior="vue" data-songs="<%= @songs.to_json %>">
+  <input type="text" v-model="filter" placeholder="Recherche par titre/artiste">
+  <table>
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Artiste</th>
+        <th>Durée</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template v-for="(song, i) in filtered_songs">
+        <tr :key="i">
+          <td>{{ song.title }}</td>
+          <td>{{ song.artist }}</td>
+          <td>{{ song.duration }}</td>
+          <td><a v-bind:href="url(song)">Modifier</a></td>
+        </tr>
+        <tr class="separator"></tr>
+      </template>
+    </tbody>
+  </table>
+</div>
+
+<%= javascript_pack_tag 'songs' %>
