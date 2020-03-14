@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   # GET /songs
   def index
-    @songs = Song.all
+    @songs = Song.all.order(:title)
   end
 
   # GET /songs/new

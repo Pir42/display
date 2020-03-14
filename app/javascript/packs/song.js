@@ -11,6 +11,7 @@ Vue.component('app', App)
 if(document.querySelector('[data-behavior="vue"]')) {
   let chords = document.querySelector('[data-behavior="vue"]').getAttribute("data-chords");
   chords = JSON.parse(chords)
+  document.querySelector('[data-behavior="vue"]').setAttribute("data-chords", "")
   const app = new Vue({
     el: '[data-behavior="vue"]',
     data() {

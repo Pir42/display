@@ -11,26 +11,50 @@ Vue.component('app', App)
 if(document.querySelector('[data-behavior="vue"]')) {
   let songs = document.querySelector('[data-behavior="vue"]').getAttribute("data-songs");
   songs = JSON.parse(songs)
+  document.querySelector('[data-behavior="vue"]').setAttribute("data-songs", "")
   const app = new Vue({
     el: '[data-behavior="vue"]',
     data() {
       return {
         songs: songs,
-        filter: ""
+        filter: "",
+        pageSize: 8,
+        currentPage: 1
       }
     },
     computed: {
       filtered_songs() {
         if(this.filter){
-          return this.songs.filter((s) => s.title.includes(this.filter) || s.artist.includes(this.filter))
+          return this.songs.filter((s) => 
+            s.title.includes(this.filter) || s.artist.includes(this.filter)
+          )
         } else {
           return this.songs
         }
+      },
+      songs_by_page() {
+        return this.filtered_songs.filter((row, index) => {
+          let start = (this.currentPage-1)*this.pageSize;
+          let end = this.currentPage*this.pageSize;
+          if(index >= start && index < end) return true;
+        });
+      },
+      start() {
+        return (this.currentPage-1)*this.pageSize
+      },
+      end() {
+        return this.currentPage*this.pageSize
       }
     },
     methods: {
       url(song) {
         return `songs/${song.id}`
+      },
+      nextPage() {
+        if((this.currentPage*this.pageSize) < this.filtered_songs.length) this.currentPage++;
+      },
+      prevPage() {
+        if(this.currentPage > 1) this.currentPage--;
       }
     }
   })

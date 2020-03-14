@@ -8,7 +8,7 @@
       <input type="text" v-model="filter" placeholder='Recherche par titre/artiste &#xe96e;' class="search__input">
     </div>
     <div class="actions__links">
-      <div class="cta-default">
+      <div class="cta">
         <%= link_to "Ajouter", new_song_path %>
       </div>
     </div>
@@ -22,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <template v-for="(song, i) in filtered_songs">
+      <template v-for="(song, i) in songs_by_page">
         <tr :key="i">
           <td>{{ song.title }}</td>
           <td>{{ song.artist }}</td>
@@ -33,6 +33,11 @@
       </template>
     </tbody>
   </table>
+
+  <div class="container">
+    <span @click="prevPage" class="action__back icon-player-skip-back" v-if="start > 0"></span>
+    <span @click="nextPage" class="action__next icon-player-skip-forward" v-if="end < filtered_songs.length"></span>
+  </div>
 </div>
 
 <%= javascript_pack_tag 'songs' %>
