@@ -13,8 +13,10 @@ const imagePath = (name) => images(name, true)
 
 import "../../../lib/assets/fonticon/style.css";
 import "../styles/styles.scss";
+import { turbolinksAdapterMixin } from "vue-turbolinks"
 
 document.addEventListener('turbolinks:load', () => {
+
   let widthPhone = 780;
 
   // Add custom class to display phone if 

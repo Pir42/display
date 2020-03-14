@@ -8,15 +8,12 @@ import App from '../vue/songs/app.vue'
 Vue.component('app', App)
 
 
-if(document.querySelector('[data-behavior="vue"]')) {
-  let songs = document.querySelector('[data-behavior="vue"]').getAttribute("data-songs");
-  songs = JSON.parse(songs)
-  document.querySelector('[data-behavior="vue"]').setAttribute("data-songs", "")
+if(document.querySelector('[data-behavior="vue"]') && songs_data) {
   const app = new Vue({
     el: '[data-behavior="vue"]',
     data() {
       return {
-        songs: songs,
+        songs: songs_data,
         filter: "",
         pageSize: 8,
         currentPage: 1
@@ -59,3 +56,6 @@ if(document.querySelector('[data-behavior="vue"]')) {
     }
   })
 }
+
+
+

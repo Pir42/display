@@ -17,7 +17,7 @@ class SongsController < ApplicationController
     @song.duration = helpers.duration_seconds(params[:song][:duration_formated])
     respond_to do |format|
       if @song.save
-        format.html { redirect_to song_path(@song) }
+        format.html { redirect_to song_path(@song), turbolinks: true }
       else
         format.html { render :edit }
       end
@@ -28,9 +28,10 @@ class SongsController < ApplicationController
   def show
     @song = Song.find(params[:id])
     @song.duration_formated = helpers.duration_formated(@song.duration)
-    if !@song.chords
+    if !@song.chords || @song.chords.empty?
       @song.chords = "[]"
     end
+    @chords = @song.chords.to_json
   end
 
   # PUT /songs/:id
@@ -39,7 +40,7 @@ class SongsController < ApplicationController
     @song.duration = helpers.duration_seconds(params[:song][:duration_formated])
     respond_to do |format|
       if @song.update(song_params)
-        format.html { redirect_to songs_path }
+        format.html { redirect_to songs_path, turbolinks: true }
       else
         format.html { render :show }
       end
