@@ -2,7 +2,7 @@
   <h1 class="title-3">Chants</h1>
 </div>
 
-<div data-behavior="vue" data-songs="<%= @songs.to_json %>">
+<div data-behavior="vue" data-songs="<%= @songs %>">
   <div class="container actions__header">
     <div class="search">
       <input type="text" v-model="filter" placeholder='Recherche par titre/artiste &#xe96e;' class="search__input">
@@ -26,7 +26,7 @@
         <tr :key="i">
           <td>{{ song.title }}</td>
           <td>{{ song.artist }}</td>
-          <td>{{ song.duration }}</td>
+          <td>{{ song.duration_formated }}</td>
           <td><a v-bind:href="url(song)">Modifier</a></td>
         </tr>
         <tr class="separator"></tr>

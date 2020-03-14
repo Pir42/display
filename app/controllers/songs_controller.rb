@@ -2,6 +2,8 @@ class SongsController < ApplicationController
   # GET /songs
   def index
     @songs = Song.all.order(:title)
+    @songs.each { |song| song.duration_formated = helpers.duration_formated(song.duration) }
+    @songs = @songs.to_json(methods: [:duration_formated])
   end
 
   # GET /songs/new
@@ -12,6 +14,7 @@ class SongsController < ApplicationController
   # POST /songs
   def create
     @song = Song.new(song_params)
+    @song.duration = helpers.duration_seconds(params[:song][:duration_formated])
     respond_to do |format|
       if @song.save
         format.html { redirect_to song_path(@song) }
@@ -24,6 +27,7 @@ class SongsController < ApplicationController
   # GET /songs/:id
   def show
     @song = Song.find(params[:id])
+    @song.duration_formated = helpers.duration_formated(@song.duration)
     if !@song.chords
       @song.chords = "[]"
     end
@@ -32,6 +36,7 @@ class SongsController < ApplicationController
   # PUT /songs/:id
   def update
     @song = Song.find(params[:id])
+    @song.duration = helpers.duration_seconds(params[:song][:duration_formated])
     respond_to do |format|
       if @song.update(song_params)
         format.html { redirect_to songs_path }
@@ -48,6 +53,7 @@ class SongsController < ApplicationController
       :title,
       :artist,
       :bpm,
+      :duration_formated,
       :chords
     )
   end
