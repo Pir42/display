@@ -1,7 +1,18 @@
-<h1 class="title-3">Chants</h1>
+<div class="container">
+  <h1 class="title-3">Chants</h1>
+</div>
 
 <div data-behavior="vue" data-songs="<%= @songs.to_json %>">
-  <input type="text" v-model="filter" placeholder="Recherche par titre/artiste">
+  <div class="container actions__header">
+    <div class="search">
+      <input type="text" v-model="filter" placeholder='Recherche par titre/artiste &#xe96e;' class="search__input">
+    </div>
+    <div class="actions__links">
+      <div class="cta-default">
+        <%= link_to "Ajouter", new_song_path %>
+      </div>
+    </div>
+  </div>
   <table>
     <thead>
       <tr>

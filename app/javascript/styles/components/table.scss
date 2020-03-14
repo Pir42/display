@@ -1,0 +1,35 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  thead {
+    text-align: left;
+    th {
+      padding: 10px 0;
+      &:first-child {
+        padding-left: 60px;
+      }
+      &:last-child {
+        padding-right: 60px;
+      }
+    }
+  }
+  tbody {
+    tr {
+      background-color: var(--light-grey);
+      &.separator {
+        background-color: white;
+        height: 5px;
+      }
+    }
+    td {
+      padding: 15px 0;
+      &:first-child {
+        padding-left: 60px;
+      }
+      &:last-child {
+        text-align: right;
+        padding-right: 60px;
+      }
+    }
+  }
+}

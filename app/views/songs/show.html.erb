@@ -1,14 +1,17 @@
-<%= form_for @song do |f| %>
-  <%= render "songs/shared/form", f: f %>
+<div class="container">
+  <%= form_for @song do |f| %>
+    <%= render "songs/shared/form", f: f %>
 
-  <h5>Structure</h5>
+    <h5>Structure</h5>
 
-  <div data-behavior="vue" data-chords="<%= @song.chords %>">
-    <app v-bind:chords="filtered_chords"></app>
-    <input type="hidden" name="song[chords]" v-bind:value="JSON.stringify(chords)">
-  </div>
+    <div data-behavior="vue" data-chords="<%= @song.chords %>">
+      <app v-bind:chords="filtered_chords"></app>
+      <input type="hidden" name="song[chords]" v-bind:value="JSON.stringify(chords)">
+    </div>
 
-<% end %>
+  <% end %>
+</div>
+
 
 
 
