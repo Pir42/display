@@ -24,14 +24,38 @@ class SetlistsController < ApplicationController
   # GET /setlists/:id
   def show
     @setlist = Setlist.find(params[:id])
-    @songs = Song.all.order(:title).to_json
+    @setlist_songs = @setlist.songs.order(:position).to_json
+    @songs = (Song.all.order(:title) - @setlist.songs).to_json
+  end
+
+  # PUT /setlists/:id
+  def update
+    @setlist = Setlist.find(params[:id])
+    setlist_positions = SetlistPosition.where(setlist: @setlist)
+    songs = JSON.parse(setlist_params[:songs]).map { |song| Song.find(song["id"]) }
+
+    songs.each_with_index do |song, index|
+      if !@setlist.songs.include?(song)
+        SetlistPosition.create(setlist: @setlist, song: song, position: index + 1)
+      end
+    end
+
+    @setlist.songs.each_with_index do |song, index|
+      sp = setlist_positions.find_by(song: song)
+      songs.include?(song) ? sp.update(position: index + 1) : sp.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to setlists_path }
+    end
   end
 
   private
 
   def setlist_params
     params.require(:setlist).permit(
-      :name
+      :name,
+      :songs
     )
   end
 end

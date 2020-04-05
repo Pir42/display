@@ -1,5 +1,44 @@
-<div class="container">
-  <%= form_for @setlist do |f| %>
-    <%= render "setlists/shared/form", f: f %>
-  <% end %>
+<div class="row" data-behavior="vue">
+  <div class="content col-sm-7 col-lg-8">
+    <div class="container">
+      <%= form_for @setlist do |f| %>
+        <%= render "setlists/shared/form", f: f %>
+        <input type="hidden" name="setlist[songs]" v-bind:value="JSON.stringify(setlist_songs)">
+      <% end %>
+      <div class="setlist__dragzone">
+        <draggable class="list-group" :list="setlist_songs" group="setlist" @change="log">
+          <div v-for="(song, index) in setlist_songs" :key="index" class="setlist__item">
+            <span class="subtitle-2">{{ index + 1 }}</span>
+            <song-item class="list-group-item setlist__song" :song="song">
+              <template v-slot:actions>
+                <span class="icon-minus actions text-orange" @click="deleteSong(index)"></span>
+              </template>
+            </song-item>
+          </div>
+        </draggable>
+        <div class="setlist__item helper">
+          <span class="subtitle-2">{{ setlist_songs.length + 1 }}</span>
+          <div class="setlist__songItem-helper"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="setlist__panel col-sm-5 col-lg-4">
+    <panel :songs="songs">
+      <template v-slot:songs-container="data">
+        <draggable class="list-group" :list="data.filtered_songs" :group="{ name: 'setlist', pull: 'clone', put: false }" @change="log" :sort="true">
+          <song-item class="list-group-item" v-for="(song, index) in data.filtered_songs" :key="index" :song="song"/>
+        </draggable>
+      </template>
+    </panel>
+  </div>
 </div>
+
+
+<%= javascript_tag do %>
+  var songs_data = <%= @songs.html_safe %>
+  var setlist_songs_data = <%= @setlist_songs.html_safe %>
+<% end %>
+
+<%= javascript_pack_tag 'setlist' %>

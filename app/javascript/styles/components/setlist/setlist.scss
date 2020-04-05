@@ -1,0 +1,24 @@
+.setlist__item {
+  display: flex;
+  margin: 15px 0;
+  align-items: center;
+  span {
+    width: 25px;
+  }
+  &.helper {
+    span {
+      color: var(--grey);
+    }
+    position: absolute;
+    bottom: -15px;
+    width: 100%;
+  }
+}
+
+.setlist__dragzone {
+  position: relative;
+  .list-group {
+    min-height: 1px;
+    padding-bottom: 40px;
+  }
+}
