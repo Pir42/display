@@ -40,9 +40,9 @@ class SetlistsController < ApplicationController
       end
     end
 
-    @setlist.songs.each_with_index do |song, index|
+    @setlist.songs.each_with_index do |song|
       sp = setlist_positions.find_by(song: song)
-      songs.include?(song) ? sp.update(position: index + 1) : sp.destroy
+      songs.include?(song) ? sp.update(position: songs.index(song) + 1) : sp.destroy
     end
 
     respond_to do |format|

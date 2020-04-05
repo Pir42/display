@@ -4,7 +4,7 @@
 
     <h5>Structure</h5>
 
-    <div data-behavior="vue" id="chords">
+    <div data-behavior="vue" id="chords" data-component="song">
       <app v-bind:chords="filtered_chords"></app>
       <input type="hidden" name="song[chords]" v-bind:value="JSON.stringify(chords)">
     </div>
@@ -16,5 +16,3 @@
 <%= javascript_tag do %>
   var chords_data = JSON.parse(<%= @chords.html_safe %>)
 <% end %>
-
-<%= javascript_pack_tag 'song' %>

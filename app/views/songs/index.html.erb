@@ -2,7 +2,7 @@
   <h1 class="title-3">Chants</h1>
 </div>
 
-<div data-behavior="vue" id="songs">
+<div data-behavior="vue" data-component="songs" id="songs">
   <div class="container actions__header">
     <div class="search">
       <input type="text" v-model="filter" placeholder='Recherche par titre/artiste &#xe96e;' class="search__input">
@@ -43,6 +43,4 @@
 <%= javascript_tag do %>
   var songs_data = <%= @songs.html_safe %>
 <% end %>
-
-<%= javascript_pack_tag 'songs' %>
 

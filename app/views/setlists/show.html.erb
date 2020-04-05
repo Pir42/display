@@ -1,4 +1,4 @@
-<div class="row" data-behavior="vue">
+<div class="row" data-behavior="vue" data-component="setlist">
   <div class="content col-sm-7 col-lg-8">
     <div class="container">
       <%= form_for @setlist do |f| %>
@@ -40,5 +40,3 @@
   var songs_data = <%= @songs.html_safe %>
   var setlist_songs_data = <%= @setlist_songs.html_safe %>
 <% end %>
-
-<%= javascript_pack_tag 'setlist' %>

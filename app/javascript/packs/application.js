@@ -15,6 +15,10 @@ import "../../../lib/assets/fonticon/style.css";
 import "../styles/styles.scss";
 import { turbolinksAdapterMixin } from "vue-turbolinks"
 
+import songs from "./songs";
+import song from "./song";
+import setlist from "./setlist";
+
 document.addEventListener('turbolinks:load', () => {
 
   let widthPhone = 780;
@@ -43,5 +47,9 @@ document.addEventListener('turbolinks:load', () => {
       sidebarNav.className += " display"
     }
   })
+
+  songs.init()
+  song.init()
+  setlist.init()
 
 })
