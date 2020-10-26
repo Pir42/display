@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+  before_action :set_song, only: [:show, :update, :destroy]
+
   # GET /songs
   def index
     @songs = Song.all.order(:title)
@@ -26,7 +28,6 @@ class SongsController < ApplicationController
 
   # GET /songs/:id
   def show
-    @song = Song.find(params[:id])
     @song.duration_formated = helpers.duration_formated(@song.duration)
     if !@song.chords || @song.chords.empty?
       @song.chords = "[]"
@@ -36,7 +37,6 @@ class SongsController < ApplicationController
 
   # PUT /songs/:id
   def update
-    @song = Song.find(params[:id])
     @song.duration = helpers.duration_seconds(params[:song][:duration_formated])
     respond_to do |format|
       if @song.update(song_params)
@@ -47,7 +47,22 @@ class SongsController < ApplicationController
     end
   end
 
+  # DESTROY /songs/:id
+  def destroy
+    respond_to do |format|
+      if @song.destroy
+        format.html { redirect_to songs_path, turbolinks: true }
+      else
+        format.html { render :show }
+      end
+    end
+  end
+
   private
+
+  def set_song
+    @song = Song.find(params[:id])
+  end
 
   def song_params
     params.require(:song).permit(
@@ -58,4 +73,5 @@ class SongsController < ApplicationController
       :chords
     )
   end
+
 end
