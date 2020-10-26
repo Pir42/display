@@ -28,7 +28,7 @@
     <panel :songs="songs">
       <template v-slot:songs-container="data">
         <draggable class="list-group" :list="data.filtered_songs" :group="{ name: 'setlist', pull: 'clone', put: false }" @change="log" :sort="true">
-          <song-item class="list-group-item" v-for="(song, index) in data.filtered_songs" :key="index" :song="song"/>
+          <song-item class="list-group-item mb-10" v-for="(song, index) in data.filtered_songs" :key="index" :song="song"/>
         </draggable>
       </template>
     </panel>

@@ -18,7 +18,7 @@
             </tr>
             </thead>
             <tbody>
-            <template v-for="(item, i) in filtered_data">
+            <template v-for="(item, i) in data_by_page">
                 <tr :key="i">
                     <slot name="table_item" v-bind:item="item"></slot>
                 </tr>
@@ -84,7 +84,7 @@ export default {
 
     methods: {
         nextPage() {
-            if((this.currentPage*this.pageSize) < this.filtered_setlists.length) this.currentPage++;
+            if((this.currentPage*this.pageSize) < this.data.length) this.currentPage++;
         },
         prevPage() {
             if(this.currentPage > 1) this.currentPage--;
