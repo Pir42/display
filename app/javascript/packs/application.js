@@ -18,6 +18,7 @@ import { turbolinksAdapterMixin } from "vue-turbolinks"
 import songs from "./songs";
 import song from "./song";
 import setlist from "./setlist";
+import setlists from "./setlists"
 
 document.addEventListener('turbolinks:load', () => {
 
@@ -51,5 +52,6 @@ document.addEventListener('turbolinks:load', () => {
   songs.init()
   song.init()
   setlist.init()
+  setlists.init()
 
 })

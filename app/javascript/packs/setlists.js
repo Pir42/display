@@ -3,32 +3,32 @@ import TurbolinksAdapter from 'vue-turbolinks';
 
 Vue.use(TurbolinksAdapter);
 
-const songs = {
+const setlists = {
   init() {
 
-    if(document.querySelector('[data-behavior="vue"]') && document.querySelector('[data-component="songs"]')) {
+    if(document.querySelector('[data-behavior="vue"]') && document.querySelector('[data-component="setlists"]')) {
       const app = new Vue({
         el: '[data-behavior="vue"]',
         data() {
           return {
-            songs: songs_data,
+            setlists: setlists_data,
             filter: "",
             pageSize: 8,
             currentPage: 1
           }
         },
         computed: {
-          filtered_songs() {
+          filtered_setlists() {
             if(this.filter){
-              return this.songs.filter((s) => 
-                s.title.includes(this.filter) || s.artist.includes(this.filter)
+              return this.setlists.filter((s) => 
+                s.name.includes(this.filter)
               )
             } else {
-              return this.songs
+              return this.setlists
             }
           },
-          songs_by_page() {
-            return this.filtered_songs.filter((row, index) => {
+          setlists_by_page() {
+            return this.filtered_setlists.filter((row, index) => {
               let start = (this.currentPage-1)*this.pageSize;
               let end = this.currentPage*this.pageSize;
               if(index >= start && index < end) return true;
@@ -42,11 +42,11 @@ const songs = {
           }
         },
         methods: {
-          url(song) {
-            return `songs/${song.id}`
+          url(setlist) {
+            return `setlists/${setlist.id}`
           },
           nextPage() {
-            if((this.currentPage*this.pageSize) < this.filtered_songs.length) this.currentPage++;
+            if((this.currentPage*this.pageSize) < this.filtered_setlists.length) this.currentPage++;
           },
           prevPage() {
             if(this.currentPage > 1) this.currentPage--;
@@ -58,7 +58,7 @@ const songs = {
   }
 }
 
-export default songs
+export default setlists
 
 
 
