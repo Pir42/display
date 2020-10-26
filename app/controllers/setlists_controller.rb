@@ -1,7 +1,7 @@
 class SetlistsController < ApplicationController
   # GET /setlists
   def index
-    @setlists = Setlist.all.order(:name).to_json(methods: :number_of_songs)
+    @setlists = Setlist.all.order(:name).to_json(methods: [:number_of_songs, :duration_f])
   end
 
   # GET /setlists/new
