@@ -3,41 +3,29 @@
 </div>
 
 <div data-behavior="vue" data-component="setlists" id="setlists">
-  <div class="container actions__header">
-    <div class="search">
-      <input type="text" v-model="filter" placeholder='Recherche par nom &#xe96e;' class="search__input">
-    </div>
-    <div class="actions__links">
-      <div class="cta">
-        <%= link_to "Ajouter", new_setlist_path %>
-      </div>
-    </div>
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Nombre de titres</th>
-        <th>Durée totale</th>
-      </tr>
-    </thead>
-    <tbody>
-      <template v-for="(setlist, i) in setlists_by_page">
-        <tr :key="i">
-          <td>{{ setlist.name }}</td>
-          <td>{{ setlist.number_of_songs }}</td>
-          <td>{{ setlist.duration_formated }}</td>
-          <td><a v-bind:href="url(setlist)">Modifier</a></td>
-        </tr>
-        <tr class="separator"></tr>
-      </template>
-    </tbody>
-  </table>
 
-  <div class="container">
-    <span @click="prevPage" class="action__back icon-player-skip-back" v-if="start > 0"></span>
-    <span @click="nextPage" class="action__next icon-player-skip-forward" v-if="end < filtered_setlists.length"></span>
-  </div>
+  <table-display
+    url_new="<%= new_setlist_path %>"
+    new_link_text="Ajouter"
+    placeholder="Rechercher par nom &#xe96e;"
+    :data="setlists"
+    :filter_fc="filter" 
+  >
+    <template v-slot:table_head>
+      <th>Nom</th>
+      <th>Nombre de titres</th>
+      <th>Durée totale</th>
+    </template>
+
+    <template v-slot:table_item="{ item: setlist }">
+      <td>{{ setlist.name }}</td>
+      <td>{{ setlist.number_of_songs }}</td>
+      <td>{{ setlist.duration_formated }}</td>
+      <td><a v-bind:href="url(setlist)">Modifier</a></td>
+    </template>
+
+  </table-display>
+
 </div>
 
 <%= javascript_tag do %>

@@ -3,41 +3,27 @@
 </div>
 
 <div data-behavior="vue" data-component="songs" id="songs">
-  <div class="container actions__header">
-    <div class="search">
-      <input type="text" v-model="filter" placeholder='Recherche par titre/artiste &#xe96e;' class="search__input">
-    </div>
-    <div class="actions__links">
-      <div class="cta">
-        <%= link_to "Ajouter", new_song_path %>
-      </div>
-    </div>
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Titre</th>
-        <th>Artiste</th>
-        <th>Durée</th>
-      </tr>
-    </thead>
-    <tbody>
-      <template v-for="(song, i) in songs_by_page">
-        <tr :key="i">
-          <td>{{ song.title }}</td>
-          <td>{{ song.artist }}</td>
-          <td>{{ song.duration_formated }}</td>
-          <td><a v-bind:href="url(song)">Modifier</a></td>
-        </tr>
-        <tr class="separator"></tr>
-      </template>
-    </tbody>
-  </table>
+  <table-display
+    url_new="<%= new_song_path %>"
+    new_link_text="Ajouter"
+    placeholder="Rechercher par titre/artiste &#xe96e;"
+    :data="songs"
+    :filter_fc="filter" 
+  >
+    <template v-slot:table_head>
+      <th>Titre</th>
+      <th>Artiste</th>
+      <th>Durée</th>
+    </template>
 
-  <div class="container">
-    <span @click="prevPage" class="action__back icon-player-skip-back" v-if="start > 0"></span>
-    <span @click="nextPage" class="action__next icon-player-skip-forward" v-if="end < filtered_songs.length"></span>
-  </div>
+    <template v-slot:table_item="{ item: song }">
+      <td>{{ song.title }}</td>
+      <td>{{ song.artist }}</td>
+      <td>{{ song.duration_formated }}</td>
+      <td><a v-bind:href="url(song)">Modifier</a></td>
+    </template>
+
+  </table-display>
 </div>
 
 <%= javascript_tag do %>
