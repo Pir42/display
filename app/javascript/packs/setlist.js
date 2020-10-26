@@ -25,15 +25,22 @@ const setlist = {
           }
         },
         methods: {
-          add: function() {
-    
-          },
-          log: function(evt) {
-    
+          onAdd: function() {
+            this.resizeContainer()
           },
           deleteSong(index) {
             this.setlist_songs.splice(index, 1)
+            this.$nextTick(() => {
+              this.resizeContainer()
+            })
+          },
+          resizeContainer(add=true) {
+            let current_height = document.querySelector(".setlist__dragzone .list-group").clientHeight
+            document.querySelector(".setlist__dragzone").style.height = current_height + 55 + "px"
           }
+        },
+        mounted() {
+          this.resizeContainer()
         }
       })
     }

@@ -9,7 +9,7 @@ class Setlist < ApplicationRecord
   end
 
   def duration
-    songs.sum(&:duration)
+    songs.select { |s| !s.duration.nil? }.sum(&:duration)
   end
 
   def duration_f

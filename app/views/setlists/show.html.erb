@@ -6,8 +6,8 @@
         <input type="hidden" name="setlist[songs]" v-bind:value="JSON.stringify(setlist_songs)">
       <% end %>
       <div class="setlist__dragzone">
-        <draggable class="list-group" :list="setlist_songs" group="setlist" @change="log">
-          <div v-for="(song, index) in setlist_songs" :key="index" class="setlist__item">
+        <draggable class="list-group" :list="setlist_songs" group="setlist" @add="onAdd" draggable=".drag">
+          <div v-for="(song, index) in setlist_songs" :key="index" class="setlist__item drag">
             <span class="subtitle-2">{{ index + 1 }}</span>
             <song-item class="list-group-item setlist__song" :song="song">
               <template v-slot:actions>
@@ -15,11 +15,12 @@
               </template>
             </song-item>
           </div>
+          <div class="setlist__item helper">
+            <span class="subtitle-2">{{ setlist_songs.length + 1 }}</span>
+            <div class="setlist__songItem-helper"></div>
+          </div>
         </draggable>
-        <div class="setlist__item helper">
-          <span class="subtitle-2">{{ setlist_songs.length + 1 }}</span>
-          <div class="setlist__songItem-helper"></div>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -27,7 +28,7 @@
   <div class="setlist__panel col-sm-5 col-lg-4">
     <panel :songs="songs">
       <template v-slot:songs-container="data">
-        <draggable class="list-group" :list="data.filtered_songs" :group="{ name: 'setlist', pull: 'clone', put: false }" @change="log" :sort="true">
+        <draggable class="list-group" :list="data.filtered_songs" :group="{ name: 'setlist', pull: 'clone', put: false }" :sort="true">
           <song-item class="list-group-item mb-10" v-for="(song, index) in data.filtered_songs" :key="index" :song="song"/>
         </draggable>
       </template>

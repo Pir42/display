@@ -9,16 +9,21 @@
     span {
       color: var(--grey);
     }
+    z-index: 1;
     position: absolute;
-    bottom: -15px;
+    bottom: 0;
+    margin: 0;
     width: 100%;
   }
 }
 
 .setlist__dragzone {
   position: relative;
+
   .list-group {
     min-height: 1px;
-    padding-bottom: 40px;
+    .list-group-item {
+      z-index: 2;
+    }
   }
 }
