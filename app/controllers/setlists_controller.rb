@@ -25,7 +25,7 @@ class SetlistsController < ApplicationController
   def show
     @setlist = Setlist.find(params[:id])
     @setlist_songs = @setlist.songs.order(:position).to_json
-    @songs = (Song.all.order(:title) - @setlist.songs).to_json
+    @songs = (Song.all.order(:title)).to_json
   end
 
   # PUT /setlists/:id
