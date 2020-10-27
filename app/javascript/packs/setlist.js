@@ -26,7 +26,11 @@ const setlist = {
         },
         computed: {
           setlist_duration() {
-            let total_duration = this.setlist_songs.map(s => s.duration ? s.duration : 0).reduce((sum, s) => sum + s)
+            let total_duration = 0
+
+            if(this.setlist_songs.length > 0) {
+              total_duration = this.setlist_songs.map(s => s.duration ? s.duration : 0).reduce((sum, s) => sum + s)
+            }
 
             let hours = Math.floor(total_duration / 3600);
             total_duration = total_duration - hours * 3600;
