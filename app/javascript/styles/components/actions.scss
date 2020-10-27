@@ -33,3 +33,9 @@
     margin-left: auto;
   }
 }
+
+@media screen and (max-width: $breakpoint) {
+  .actions__header {
+    width: auto;
+  }
+}

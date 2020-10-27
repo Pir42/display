@@ -7,7 +7,7 @@
   </div>
 
   <div class="col-xs-6 col-md-4 end-xs">
-    <%= link_to "Supprimer", song_path(f.object), method: :delete, class: "mr-2 delete" %>
+    <%= link_to "Supprimer", song_path(f.object), method: :delete, class: "mr-2 delete" if f.object.setlists.empty? %>
     <%= f.submit "Enregistrer" %>
   </div>
 </div>

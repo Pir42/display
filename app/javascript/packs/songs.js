@@ -25,7 +25,7 @@ const songs = {
             return `songs/${song.id}`
           },
           filter(song, search) {
-            return song.title.includes(search) || song.artist.includes(search)
+            return song.title.toLowerCase().startsWith(search.toLowerCase()) || song.artist.toLowerCase().startsWith(search.toLowerCase())
           }
         }
       })

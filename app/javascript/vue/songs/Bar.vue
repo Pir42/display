@@ -42,7 +42,7 @@ export default {
       max-width: 50px;
       input {
         text-align: center;
-        max-width: calc(100% - 30px);
+        max-width: calc(100% - 20px);
       }
     }
   }
