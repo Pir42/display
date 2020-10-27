@@ -1,3 +1,10 @@
+.setlists.show {
+  .content {
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
+}
+
 .setlist__item {
   display: flex;
   margin: 15px 0;
