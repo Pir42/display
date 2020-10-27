@@ -22,7 +22,7 @@ import setlists from "./setlists"
 
 document.addEventListener('turbolinks:load', () => {
 
-  let widthPhone = 780;
+  let widthPhone = 770;
 
   // Add custom class to display phone if 
   // innerWidth of screen is less than

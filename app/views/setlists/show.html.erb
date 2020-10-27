@@ -1,9 +1,9 @@
-<div class="row" data-behavior="vue" data-component="setlist">
+<div class="row setlist" data-behavior="vue" data-component="setlist">
   <div class="content col-xs-12 col-sm-7 col-lg-8">
     <div class="container">
       <%= form_for @setlist do |f| %>
         <%= render "setlists/shared/form", f: f %>
-        <input type="hidden" name="setlist[songs]" v-bind:value="JSON.stringify(setlist_songs)">
+        <input type="hidden" name="songs" v-bind:value="JSON.stringify(setlist_songs)">
       <% end %>
       <div class="setlist__dragzone">
         <draggable class="list-group" :list="setlist_songs" group="setlist" @add="onAdd" draggable=".drag">

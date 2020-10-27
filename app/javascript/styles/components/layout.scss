@@ -8,7 +8,7 @@
   margin: 30px 60px;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: $breakpoint) {
   .main {
     max-width: 100%;
     margin-left: 0;

@@ -24,26 +24,41 @@ class SetlistsController < ApplicationController
   # GET /setlists/:id
   def show
     @setlist = Setlist.find(params[:id])
-    @setlist_songs = @setlist.songs.order(:position).to_json
+    @setlist_songs = @setlist.songs_with_spid.to_json(methods: [:setlist_position_id])
+
     @songs = (Song.all.order(:title)).to_json
   end
 
   # PUT /setlists/:id
   def update
     @setlist = Setlist.find(params[:id])
-    setlist_positions = SetlistPosition.where(setlist: @setlist)
-    songs = JSON.parse(setlist_params[:songs]).map { |song| Song.find(song["id"]) }
 
-    songs.each_with_index do |song, index|
-      if !@setlist.songs.include?(song)
-        SetlistPosition.create(setlist: @setlist, song: song, position: index + 1)
+    if params[:songs]
+      
+      raw_songs = JSON.parse(params[:songs])
+
+      raw_songs.each do |raw_song|
+        if raw_song["setlist_position_id"].nil?
+          song = Song.find_by(id: raw_song["id"])
+          unless song.nil?
+            sp = SetlistPosition.create(setlist: @setlist, song: song, position: @setlist.songs.length + 1) 
+            raw_song["setlist_position_id"] = sp.id
+          end
+        end
       end
+
+      @setlist.setlist_positions.each do |sp|
+        raw_song = raw_songs.find { |s| s["setlist_position_id"] == sp.id }
+        if raw_song
+          sp.update(position: raw_songs.index(raw_song) + 1)
+        else
+          sp.destroy
+        end
+      end
+
     end
 
-    @setlist.songs.each_with_index do |song|
-      sp = setlist_positions.find_by(song: song)
-      songs.include?(song) ? sp.update(position: songs.index(song) + 1) : sp.destroy
-    end
+    @setlist.update(setlist_params)
 
     respond_to do |format|
       format.html { redirect_to setlists_path }
@@ -54,8 +69,12 @@ class SetlistsController < ApplicationController
 
   def setlist_params
     params.require(:setlist).permit(
-      :name,
-      :songs
+      :name
     )
+  end
+
+  def difference(original, other)
+    h = other.each_with_object(Hash.new(0)) { |e,h| h[e] += 1 }
+    original.reject { |e| h[e] > 0 && h[e] -= 1 }
   end
 end
