@@ -25,7 +25,7 @@ const setlists = {
             return `setlists/${setlist.id}`
           },
           filter(setlist, search) {
-            return setlist.name.includes(search)
+            return setlist.name.toLowerCase().startsWith(search.toLowerCase())
           }
         }
       })
