@@ -8,6 +8,10 @@
   margin: 30px 60px;
 }
 
+.flex-content {
+  display: flex;
+}
+
 @media screen and (max-width: $breakpoint) {
   .main {
     max-width: 100%;
@@ -17,5 +21,9 @@
   .container {
     max-width: 100%;
     margin: 15px 30px;
+  }
+
+  .flex-content {
+    display: block;
   }
 }

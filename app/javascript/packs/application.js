@@ -19,6 +19,7 @@ import songs from "./songs";
 import song from "./song";
 import setlist from "./setlist";
 import setlists from "./setlists"
+import broadcast from "./broadcast"
 
 document.addEventListener('turbolinks:load', () => {
 
@@ -53,5 +54,6 @@ document.addEventListener('turbolinks:load', () => {
   song.init()
   setlist.init()
   setlists.init()
+  broadcast.init()
 
 })

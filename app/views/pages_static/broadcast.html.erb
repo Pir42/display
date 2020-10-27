@@ -1,0 +1,38 @@
+<div data-behavior="vue" data-component="broadcast">
+
+    <div class="flex-content">
+        <div class="container">
+            <h2 class="subtitle-1">Ecrans disponibles</h2>
+            <pin text="Coucou" icon="airplay" color="pink" v-bind:reactive="true" size="medium"/>
+        </div>
+
+        <div class="container">
+            <h2 class="subtitle-1">Setlists et chants</h2>
+
+            <div class="search">
+                <input type="text" v-model="filter" placeholder='Rechercher un titre/setlist' class="search__input">
+            </div>
+
+            <div>
+                <template v-for="(setlist, i) in limit(filtered_setlists, 2)">
+                    <pin :text="setlist.name" icon="player-list" color="purple" v-bind:reactive="true" v-bind:margins="true"/>
+                </template>
+            </div>
+
+                <hr>
+
+            <div>
+                <template v-for="(song, i) in limit(filtered_songs, 2)">
+                    <pin :text="aliasSong(song)" icon="music-note" color="pink" v-bind:reactive="true" v-bind:margins="true"/>
+                </template>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<%= javascript_tag do %>
+  var songs_data = <%= @songs.html_safe %>
+  var setlists_data = <%= @setlists.html_safe %>
+<% end %>
+
