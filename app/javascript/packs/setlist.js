@@ -24,6 +24,22 @@ const setlist = {
             setlist_songs: setlist_songs_data
           }
         },
+        computed: {
+          setlist_duration() {
+            let total_duration = this.setlist_songs.map(s => s.duration ? s.duration : 0).reduce((sum, s) => sum + s)
+
+            let hours = Math.floor(total_duration / 3600);
+            total_duration = total_duration - hours * 3600;
+            let minutes = Math.floor(total_duration / 60);
+            let seconds = total_duration - minutes * 60;
+
+            if(hours > 0) {
+              return `${hours.toString().padStart(2, 0)}'${minutes.toString().padStart(2, 0)}'${seconds.toString().padStart(2, 0)}`
+            } else {
+              return `${minutes.toString().padStart(2, 0)}'${seconds.toString().padStart(2, 0)}`
+            }
+          }
+        },
         methods: {
           onAdd: function() {
             this.resizeContainer()

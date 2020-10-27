@@ -5,6 +5,12 @@
         <%= render "setlists/shared/form", f: f %>
         <input type="hidden" name="songs" v-bind:value="JSON.stringify(setlist_songs)">
       <% end %>
+
+      <div class="informations">
+        <p>Durée : <span>{{ setlist_duration }}</span></p>
+        <p>Nombre de titres : <span>{{ setlist_songs.length }}</span></p>
+      </div>
+
       <div class="setlist__dragzone">
         <draggable class="list-group" :list="setlist_songs" group="setlist" @add="onAdd" draggable=".drag">
           <div v-for="(song, index) in setlist_songs" :key="index" class="setlist__item drag">
