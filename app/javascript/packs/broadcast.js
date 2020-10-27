@@ -18,6 +18,7 @@ const broadcast = {
         el: '[data-behavior="vue"]',
         data() {
             return {
+                screenName: "",
                 filter: "",
                 setlists: setlists_data,
                 songs: songs_data,
@@ -45,7 +46,7 @@ const broadcast = {
             },
             setlists_list() {
                 return {
-                    items: this.limit(this.filtered_setlists, 2),
+                    items: this.limit(this.filtered_setlists, 3),
                     textprop: "name",
                     color: "purple",
                     icon: "player-list",
@@ -55,7 +56,7 @@ const broadcast = {
             },
             songs_list() {
                 return {
-                    items: this.limit(this.filtered_songs, 2),
+                    items: this.limit(this.filtered_songs, 5),
                     textprop: "alias",
                     color: "pink",
                     icon: "music-note",

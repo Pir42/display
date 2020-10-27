@@ -54,6 +54,6 @@ export default {
         height: 2px;
         border: none;
         width: 40%;
-        background-color: var(--medium-grey);
+        background-color: var(--light-grey);
     }
 </style>

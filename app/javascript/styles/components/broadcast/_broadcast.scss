@@ -1,0 +1,48 @@
+.broadcast {
+    .entity__association {
+        width: 70%;
+        margin: auto;
+        margin-top: 30px;
+        .search {
+            input {
+                display: block;
+                text-align: center;
+                box-sizing: border-box;
+                margin: auto;
+            }
+            margin-bottom: 30px;
+        }
+    }
+
+    .screen__form {
+        input, button {
+            display: block;
+            margin: auto;
+            border: none;
+        }
+        .separator {
+            display: block;
+            margin: auto;
+            width: 3px;
+            height: 20px;
+            background-color: var(--pink);
+        }
+        button {
+            span {
+                font-size: 25px;
+                display: block;
+                margin-bottom: 5px;
+            }
+            color: white;
+            font-family: 'Montserrat';
+            font-size: 14px;
+            font-weight: bold;
+            background-color: var(--pink);
+            border-radius: 8px;
+            padding: 20px 30px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

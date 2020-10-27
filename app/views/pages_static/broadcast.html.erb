@@ -2,18 +2,29 @@
 
     <div class="flex-content">
         <div class="container">
-            <h2 class="subtitle-1">Ecrans disponibles</h2>
-            <pin text="Coucou" icon="airplay" color="pink" size="medium"/>
+            <h2 class="subtitle-1">Écrans disponibles</h2>
+
+            <div class="screen__form">
+                <input type="text" v-model="screenName" placeholder="Nommez votre écran">
+                <span class="separator"></span>
+                <button>
+                    <span class="icon-broadcast"></span>
+                    Diffuser sur cet écran
+                </button>
+            </div>
         </div>
 
         <div class="container">
             <h2 class="subtitle-1">Setlists et chants</h2>
 
-            <div class="search">
-                <input type="text" v-model="filter" placeholder='Rechercher un titre/setlist' class="search__input">
+            <div class="entity__association">
+                <div class="search">
+                    <input type="text" v-model="filter" placeholder='Rechercher un titre/setlist' class="search__input">
+                </div>
+
+                <pin-list :lists="[setlists_list, songs_list]" v-bind:separate="true"/>
             </div>
 
-            <pin-list :lists="[setlists_list, songs_list]" v-bind:separate="true"/>
         </div>
     </div>
 
