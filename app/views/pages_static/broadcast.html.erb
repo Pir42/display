@@ -3,7 +3,7 @@
     <div class="flex-content">
         <div class="container">
             <h2 class="subtitle-1">Ecrans disponibles</h2>
-            <pin text="Coucou" icon="airplay" color="pink" v-bind:reactive="true" size="medium"/>
+            <pin text="Coucou" icon="airplay" color="pink" size="medium"/>
         </div>
 
         <div class="container">
@@ -13,19 +13,7 @@
                 <input type="text" v-model="filter" placeholder='Rechercher un titre/setlist' class="search__input">
             </div>
 
-            <div>
-                <template v-for="(setlist, i) in limit(filtered_setlists, 2)">
-                    <pin :text="setlist.name" icon="player-list" color="purple" v-bind:reactive="true" v-bind:margins="true"/>
-                </template>
-            </div>
-
-                <hr>
-
-            <div>
-                <template v-for="(song, i) in limit(filtered_songs, 2)">
-                    <pin :text="aliasSong(song)" icon="music-note" color="pink" v-bind:reactive="true" v-bind:margins="true"/>
-                </template>
-            </div>
+            <pin-list :lists="[setlists_list, songs_list]" v-bind:separate="true"/>
         </div>
     </div>
 

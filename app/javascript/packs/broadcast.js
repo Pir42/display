@@ -4,8 +4,10 @@ import TurbolinksAdapter from 'vue-turbolinks';
 Vue.use(TurbolinksAdapter);
 
 import Pin from "../vue/Pin"
+import PinList from "../vue/PinList"
 
 Vue.component('pin', Pin)
+Vue.component('pin-list', PinList)
 
 const broadcast = {
   init() {
@@ -23,6 +25,10 @@ const broadcast = {
             }
         },
         computed: {
+            aliasSongs() {
+                this.songs.forEach((s) => { s.alias = `${s.title} - ${s.artist}`})
+                return this.songs
+            },
             filtered_setlists() {
                 if(this.filter != "") {
                     return this.setlists.filter((setlist) => setlist.name.toLowerCase().startsWith(this.filter.toLowerCase()))
@@ -32,9 +38,29 @@ const broadcast = {
             },
             filtered_songs() {
                 if(this.filter != "") {
-                    return this.songs.filter((song) => song.title.toLowerCase().startsWith(this.filter.toLowerCase()) || song.artist.toLowerCase().startsWith(this.filter.toLowerCase()))
+                    return this.aliasSongs.filter((song) => song.title.toLowerCase().startsWith(this.filter.toLowerCase()) || song.artist.toLowerCase().startsWith(this.filter.toLowerCase()))
                 } else {
-                    return this.songs
+                    return this.aliasSongs
+                }
+            },
+            setlists_list() {
+                return {
+                    items: this.limit(this.filtered_setlists, 2),
+                    textprop: "name",
+                    color: "purple",
+                    icon: "player-list",
+                    reactive: true,
+                    margins: true
+                }
+            },
+            songs_list() {
+                return {
+                    items: this.limit(this.filtered_songs, 2),
+                    textprop: "alias",
+                    color: "pink",
+                    icon: "music-note",
+                    reactive: true,
+                    margins: true
                 }
             }
         },
@@ -45,7 +71,7 @@ const broadcast = {
             limit(array, limit) {
                 return array.slice(0, limit)
             }
-        }
+        },
       })
 
     }

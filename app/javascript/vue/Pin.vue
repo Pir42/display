@@ -70,7 +70,7 @@ export default {
     methods: {
         onClick() {
             if(this.reactive) {
-                this.isActive = !this.isActive
+                this.$emit('pin-clicked', this)
             }
         },
 
